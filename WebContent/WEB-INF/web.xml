@@ -116,7 +116,7 @@
     <servlet-name>LogoutController</servlet-name>
     <url-pattern>/admin/logout</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ProfileController</servlet-name>
     <servlet-class>mta.cnpm12.store.controller.backend.Profile</servlet-class>
   </servlet>
@@ -147,4 +147,13 @@
     <error-code>500</error-code>
     <location>/backend/500.jsp</location>
   </error-page>
+  
+  <servlet>
+    <servlet-name>IndexController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexController</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
 </web-app>

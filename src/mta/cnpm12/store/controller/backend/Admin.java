@@ -39,46 +39,51 @@ public class Admin extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		String task = "";
-		if (request.getParameter("task") != null) {
-			task = request.getParameter("task");
+		if(request.getSession().getAttribute("login") == null){
+			response.sendRedirect(request.getContextPath() + "/admin/login");
 		}
-		if (task.equals("")) {
-			List<QuanTriVien> list;
-			try {
-				list = AdminDAO.listAll();
-				request.setAttribute("list", list);
-				request.getRequestDispatcher("/backend/admin-list.jsp").forward(request, response);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		else{
+			String task = "";
+			if (request.getParameter("task") != null) {
+				task = request.getParameter("task");
 			}
-			return;
-		}
-		if (task.equals("create")) {
-			request.getRequestDispatcher("/backend/add-admin.jsp").forward(request, response);
-		}
-		if (task.equals("edit")) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			try {
-				QuanTriVien e = AdminDAO.getById(id);
-				request.setAttribute("e", e);
-				request.getRequestDispatcher("/backend/edit-admin.jsp").forward(request, response);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if (task.equals("delete")) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			try {
-				boolean bl = AdminDAO.delete(id);
-				if (bl) {
-					response.sendRedirect(request.getContextPath() + "/admin/admin");
+			if (task.equals("")) {
+				List<QuanTriVien> list;
+				try {
+					list = AdminDAO.listAll();
+					request.setAttribute("list", list);
+					request.getRequestDispatcher("/backend/admin-list.jsp").forward(request, response);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return;
+			}
+			if (task.equals("create")) {
+				request.getRequestDispatcher("/backend/add-admin.jsp").forward(request, response);
+			}
+			if (task.equals("edit")) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				try {
+					QuanTriVien e = AdminDAO.getById(id);
+					request.setAttribute("e", e);
+					request.getRequestDispatcher("/backend/edit-admin.jsp").forward(request, response);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (task.equals("delete")) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				try {
+					boolean bl = AdminDAO.delete(id);
+					if (bl) {
+						response.sendRedirect(request.getContextPath() + "/admin/admin");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

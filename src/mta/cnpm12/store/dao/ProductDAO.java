@@ -190,4 +190,41 @@ public class ProductDAO {
 		}
 		return false;
 	}
+	
+	public static List<SanPham> listHotProduct() throws SQLException {
+		String query = "select top(4) * from SanPham order by NgayCapNhat desc";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		List<SanPham> list = new ArrayList<SanPham>();
+		while (rs.next()) {
+			SanPham e = new SanPham();
+			e.setMaSP(rs.getInt(1));
+			e.setTenSP(rs.getString(2));
+			e.setGiaSP(rs.getDouble(3));
+			e.setGiaKhuyenMai(rs.getDouble(4));
+			e.setThongSoKyThuat(rs.getString(5));
+			e.setBaoHanh(rs.getString(6));
+			e.setPhuKienDiKem(rs.getString(7));
+			e.setNgayCapNhat(rs.getDate(8));
+			e.setTrangThai(rs.getBoolean(9));
+			e.setMaDanhMuc(rs.getInt(10));
+			e.setMaThuongHieu(rs.getInt(11));
+			list.add(e);
+		}
+		return list;
+	}
+	
+	public static HinhAnh getImageHotProduct(int id) throws SQLException {
+		String query = "select top(1) * from HinhAnh where MaSP = " + id;
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			HinhAnh e = new HinhAnh();
+			e.setMaHinhAnh(rs.getInt(1));
+			e.setTenHinhAnh(rs.getString(2));
+			e.setMaSP(rs.getInt(3));
+			return e;
+		}
+		return null;
+	}
 }

@@ -2,7 +2,7 @@
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
    	<div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="<%= request.getContextPath()%>/admin/home"><i class="fa fa-home"></i> Trang chủ </a></li>
+                  <li><a href="<%= request.getContextPath()%>/admin/index"><i class="fa fa-home"></i> Trang chủ </a></li>
                   <li><a href="<%= request.getContextPath()%>/admin/product-category"><i class="fa fa-file"></i> Danh mục sản phẩm  </a></li>
                   <li><a href="<%= request.getContextPath()%>/admin/brand"><i class="fa fa-apple"></i> Thương hiệu </a></li>
                   <li><a href="<%= request.getContextPath()%>/admin/color"><i class="fa fa-image"></i> Màu sắc </a></li>
