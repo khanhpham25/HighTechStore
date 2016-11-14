@@ -192,7 +192,7 @@ public class ProductDAO {
 	}
 	
 	public static List<SanPham> listHotProduct() throws SQLException {
-		String query = "select top(4) * from SanPham order by NgayCapNhat desc";
+		String query = "select top(4) * from SanPham where TrangThai = 1 order by NgayCapNhat desc";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
 		List<SanPham> list = new ArrayList<SanPham>();

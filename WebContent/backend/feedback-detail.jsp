@@ -47,6 +47,13 @@
 <!-- Custom Theme Style -->
 <link href="../backend/build/css/custom.min.css" rel="stylesheet">
 <script src="../backend/ckeditor/ckeditor.js" language="javascript"></script>
+<script>
+// Cấu hình lại màu nền giao diện.
+CKEDITOR.config.uiColor = '#9AB8F3';
+CKEDITOR.config.resize_enabled = false;
+CKEDITOR.config.width = '850px';
+CKEDITOR.config.height = '250px';
+</script>
 </head>
 
 <body class="nav-md">

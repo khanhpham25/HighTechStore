@@ -129,26 +129,27 @@ public class Admin extends HttpServlet {
 			}
 		}
 		if (task.equals("edit")) {
+			int id = Integer.parseInt(request.getParameter("id"));
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String username = request.getParameter("username");
-			String password = null;
+			String password = request.getParameter("password");
+			boolean status = Boolean.parseBoolean(request.getParameter("status"));
 			try {
-				password = Encryptor.encryptMD5(request.getParameter("password"));
-			} catch (NoSuchAlgorithmException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			Boolean status = Boolean.parseBoolean(request.getParameter("status"));
-			int id = Integer.parseInt(request.getParameter("id"));
-			QuanTriVien e = new QuanTriVien(id, name, email, username, password, status);
-			boolean bl = false;
-			try {
+				QuanTriVien obj = AdminDAO.getById(id);
+				if(!obj.getMatKhau().equals(password)){
+					password = Encryptor.encryptMD5(password);
+				}
+				QuanTriVien e = new QuanTriVien(id, name, email, username, password, status);
+				boolean bl = false;
 				bl = AdminDAO.edit(e);
 				if (bl) {
 					response.sendRedirect(request.getContextPath() + "/admin/admin");
 				}
-			} catch (SQLException e1) {
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			} catch (NoSuchAlgorithmException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

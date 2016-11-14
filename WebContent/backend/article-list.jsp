@@ -85,6 +85,7 @@
 								class="table table-striped table-bordered">
 								<thead>
 									<tr>
+										<th>Hình ảnh</th>
 										<th>Tiêu đề</th>
 										<th>Mô tả</th>
 										<th>Ngày đăng</th>
@@ -100,6 +101,7 @@
 										for (int i = 0; i < list.size(); i++) {
 									%>
 									<tr>
+										<td><img src="../upload/<%= list.get(i).getHinhAnh()%>" width="100px" height="100px"/></td>
 										<td><%=list.get(i).getTieuDe()%></td>
 										<td><%=list.get(i).getMoTa()%></td>
 										<td><%=list.get(i).getNgayDang()%></td>

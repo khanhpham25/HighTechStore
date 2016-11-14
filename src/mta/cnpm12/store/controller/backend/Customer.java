@@ -107,17 +107,15 @@ public class Customer extends HttpServlet {
 			String email = request.getParameter("email");
 			Boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
 			String username = request.getParameter("username");
-			String password = null;
+			String password = request.getParameter("password");
 			try {
-				password = Encryptor.encryptMD5(request.getParameter("password"));
-			} catch (NoSuchAlgorithmException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			Boolean status = Boolean.parseBoolean(request.getParameter("status"));
-			KhachHang e = new KhachHang(id, name, address, phone, email, gender, username, password, status);
-			boolean bl = false;
-			try {
+				KhachHang obj = CustomerDAO.getById(id);
+				if(!obj.getMatKhau().equals(password)){
+					password = Encryptor.encryptMD5(password);
+				}
+				boolean status = Boolean.parseBoolean(request.getParameter("status"));
+				KhachHang e = new KhachHang(id, name, address, phone, email, gender, username, password, status);
+				boolean bl = false;
 				bl = CustomerDAO.edit(e);
 				if (bl) {
 					response.sendRedirect(request.getContextPath() + "/admin/customer");
@@ -125,7 +123,11 @@ public class Customer extends HttpServlet {
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			} catch (NoSuchAlgorithmException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
+			
 		}
 	}
 

@@ -10,24 +10,24 @@
 				<h4 class="modal-title" id="Login">Đăng nhập</h4>
 			</div>
 			<div class="modal-body">
-				<form action="#" method="post">
+				<form action="<%=request.getContextPath()%>/index" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" id="email_modal"
-							placeholder="Tên đăng nhập">
+						<input type="text" class="form-control" name="username"
+							placeholder="Tên đăng nhập" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" id="password_modal"
-							placeholder="Mật khẩu">
+						<input type="password" class="form-control" name="password"
+							placeholder="Mật khẩu" autocomplete="off">
 					</div>
 					<p class="text-center">
-						<button class="btn btn-template-main">
+						<button type="submit" class="btn btn-template-main">
 							<i class="fa fa-sign-in"></i> Đăng nhập
 						</button>
 					</p>
 				</form>
 				<p class="text-center text-muted">Bạn chưa đăng ký?</p>
 				<p class="text-center text-muted">
-					<a><strong>Đăng ký ngay!</strong></a> Đăng ký đơn giản chỉ trong 1
+					<a href="<%=request.getContextPath()%>/register"><strong>Đăng ký ngay!</strong></a> Đăng ký đơn giản chỉ trong 1
 					phút và bạn có cơ hội nhận được rất nhiều ưu đãi!
 				</p>
 			</div>

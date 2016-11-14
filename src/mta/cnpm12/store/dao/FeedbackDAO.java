@@ -1,6 +1,7 @@
 package mta.cnpm12.store.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +28,19 @@ public class FeedbackDAO {
 			list.add(e);
 		}
 		return list;
+	}
+
+	public static boolean create(PhanHoi e) throws SQLException {
+		PreparedStatement pstmt;
+		pstmt = con.prepareStatement("insert into PhanHoi values (?,?,?)");
+		pstmt.setDate(1, (Date) e.getNgayGio());
+		pstmt.setString(2, e.getNoiDung());
+		pstmt.setInt(3, e.getMaKhachHang());
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	public static PhanHoi getById(int id) throws SQLException {

@@ -6,6 +6,7 @@ public class BaiViet {
 	private int MaBaiViet;
 	private String TieuDe;
 	private String MoTa;
+	private String HinhAnh;
 	private Date NgayDang;
 	private String NoiDung;
 	private boolean TrangThai;
@@ -15,11 +16,12 @@ public class BaiViet {
 
 	}
 
-	public BaiViet(int maBaiViet, String tieuDe, String moTa, Date ngayDang, String noiDung, boolean trangThai,
+	public BaiViet(int maBaiViet, String tieuDe, String moTa, String hinhAnh, Date ngayDang, String noiDung, boolean trangThai,
 			int maDanhMuc) {
 		MaBaiViet = maBaiViet;
 		TieuDe = tieuDe;
 		MoTa = moTa;
+		setHinhAnh(hinhAnh);
 		NgayDang = ngayDang;
 		NoiDung = noiDung;
 		TrangThai = trangThai;
@@ -80,6 +82,14 @@ public class BaiViet {
 
 	public void setMaDanhMuc(int maDanhMuc) {
 		MaDanhMuc = maDanhMuc;
+	}
+
+	public String getHinhAnh() {
+		return HinhAnh;
+	}
+
+	public void setHinhAnh(String hinhAnh) {
+		HinhAnh = hinhAnh;
 	}
 
 }

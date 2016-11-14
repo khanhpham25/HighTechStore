@@ -48,6 +48,13 @@
 <!-- Custom Theme Style -->
 <link href="../backend/build/css/custom.min.css" rel="stylesheet">
 <script src="../backend/ckeditor/ckeditor.js" language="javascript"></script>
+<script>
+// Cấu hình lại màu nền giao diện.
+CKEDITOR.config.uiColor = '#9AB8F3';
+CKEDITOR.config.resize_enabled = false;
+CKEDITOR.config.width = '850px';
+CKEDITOR.config.height = '250px';
+</script>
 </head>
 
 <body class="nav-md">
@@ -79,7 +86,7 @@
 					<h4>Thêm bài viết</h4>
 					<hr />
 					<form method="post"
-						action="<%=request.getContextPath()%>/admin/article">
+						action="<%=request.getContextPath()%>/admin/article" enctype="multipart/form-data">
 						<input type="hidden" name="task" value="create" />
 						<div class="form-group">
 							<label class="control-label col-md-2">Tiêu đề</label>
@@ -94,6 +101,14 @@
 							<div class="col-md-10">
 								<input type="text" name="desc" required="required" autocomplete="off"
 									style="width: 300px; height: 35px;" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-2">Hình ảnh</label>
+							<div class="col-md-10">
+								<input type="file" name="img" required="required" autocomplete="off"
+									style="width: 300px; height: 35px; padding: 8px;" />
 							</div>
 						</div>
 

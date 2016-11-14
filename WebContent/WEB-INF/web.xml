@@ -147,7 +147,6 @@
     <error-code>500</error-code>
     <location>/backend/500.jsp</location>
   </error-page>
-  
   <servlet>
     <servlet-name>IndexController</servlet-name>
     <servlet-class>mta.cnpm12.store.controller.frontend.Index</servlet-class>
@@ -155,5 +154,45 @@
   <servlet-mapping>
     <servlet-name>IndexController</servlet-name>
     <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterController</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterSuccessController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.RegisterSuccess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterSuccessController</servlet-name>
+    <url-pattern>/register-success</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ContactController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.Contact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ContactController</servlet-name>
+    <url-pattern>/contact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsListController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.NewsList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsListController</servlet-name>
+    <url-pattern>/news-list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.News</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsController</servlet-name>
+    <url-pattern>/news</url-pattern>
   </servlet-mapping>
 </web-app>

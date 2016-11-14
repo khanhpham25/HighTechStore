@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="mta.cnpm12.store.beans.SanPham"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="mta.cnpm12.store.beans.HinhAnh"%>
@@ -18,7 +19,7 @@
 		<div class="col-sm-6 col-md-3">
 			<div class="box-image">
 				<div class="image">
-					<img src="upload/<%=listImage.get(i).getTenHinhAnh()%>" alt=""
+					<img style="height: 250px; width: 250px" src="upload/<%=listImage.get(i).getTenHinhAnh()%>" alt=""
 						class="img-responsive" />
 				</div>
 				<div class="bg"></div>
@@ -26,6 +27,18 @@
 					<h3>
 						<a href="#"><%= listProduct.get(i).getTenSP() %></a>
 					</h3>
+					<%
+					if(listProduct.get(i).getGiaKhuyenMai() != 0){
+						%>
+						<h3><%= new DecimalFormat("#,###,###,###").format(listProduct.get(i).getGiaKhuyenMai()) %> VNĐ</h3>
+						<%
+					}
+					else{
+						%>
+						<h3><%= new DecimalFormat("#,###,###,###").format(listProduct.get(i).getGiaSP()) %> VNĐ</h3>
+						<%
+					}
+					%>					
 				</div>
 				<div class="text">
 					<p class="buttons">

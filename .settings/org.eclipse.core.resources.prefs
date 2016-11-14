@@ -13,3 +13,7 @@ encoding//src/mta/cnpm12/store/controller/backend/OrderForm.java=UTF-8
 encoding//src/mta/cnpm12/store/controller/backend/Product.java=UTF-8
 encoding//src/mta/cnpm12/store/controller/backend/ProductCategory.java=UTF-8
 encoding//src/mta/cnpm12/store/controller/backend/Profile.java=UTF-8
+encoding//src/mta/cnpm12/store/controller/frontend/Contact.java=UTF-8
+encoding//src/mta/cnpm12/store/controller/frontend/Index.java=UTF-8
+encoding//src/mta/cnpm12/store/controller/frontend/Register.java=UTF-8
+encoding//src/mta/cnpm12/store/dao/CustomerDAO.java=UTF-8

@@ -24,10 +24,11 @@ public class ArticleDAO {
 			e.setMaBaiViet(rs.getInt(1));
 			e.setTieuDe(rs.getString(2));
 			e.setMoTa(rs.getString(3));
-			e.setNgayDang(rs.getDate(4));
-			e.setNoiDung(rs.getString(5));
-			e.setTrangThai(rs.getBoolean(6));
-			e.setMaDanhMuc(rs.getInt(7));
+			e.setHinhAnh(rs.getString(4));
+			e.setNgayDang(rs.getDate(5));
+			e.setNoiDung(rs.getString(6));
+			e.setTrangThai(rs.getBoolean(7));
+			e.setMaDanhMuc(rs.getInt(8));
 			list.add(e);
 		}
 		return list;
@@ -35,13 +36,14 @@ public class ArticleDAO {
 
 	public static boolean create(BaiViet e) throws SQLException {
 		PreparedStatement pstmt;
-		pstmt = con.prepareStatement("insert into BaiViet values (?,?,?,?,?,?)");
+		pstmt = con.prepareStatement("insert into BaiViet values (?,?,?,?,?,?,?)");
 		pstmt.setString(1, e.getTieuDe());
 		pstmt.setString(2, e.getMoTa());
-		pstmt.setDate(3, (Date) e.getNgayDang());
-		pstmt.setString(4, e.getNoiDung());
-		pstmt.setBoolean(5, e.isTrangThai());
-		pstmt.setInt(6, e.getMaDanhMuc());
+		pstmt.setString(3, e.getHinhAnh());
+		pstmt.setDate(4, (Date) e.getNgayDang());
+		pstmt.setString(5, e.getNoiDung());
+		pstmt.setBoolean(6, e.isTrangThai());
+		pstmt.setInt(7, e.getMaDanhMuc());
 		int i = pstmt.executeUpdate();
 		if (i > 0) {
 			return true;
@@ -59,10 +61,11 @@ public class ArticleDAO {
 			e.setMaBaiViet(rs.getInt(1));
 			e.setTieuDe(rs.getString(2));
 			e.setMoTa(rs.getString(3));
-			e.setNgayDang(rs.getDate(4));
-			e.setNoiDung(rs.getString(5));
-			e.setTrangThai(rs.getBoolean(6));
-			e.setMaDanhMuc(rs.getInt(7));
+			e.setHinhAnh(rs.getString(4));
+			e.setNgayDang(rs.getDate(5));
+			e.setNoiDung(rs.getString(6));
+			e.setTrangThai(rs.getBoolean(7));
+			e.setMaDanhMuc(rs.getInt(8));
 			return e;
 		}
 		return null;
@@ -95,5 +98,65 @@ public class ArticleDAO {
 			return true;
 		}
 		return false;
+	}
+	
+	public static List<BaiViet> listHotNews() throws SQLException {
+		String query = "select top(2) * from BaiViet where TrangThai = 1 order by NgayDang desc";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		List<BaiViet> list = new ArrayList<BaiViet>();
+		while (rs.next()) {
+			BaiViet e = new BaiViet();
+			e.setMaBaiViet(rs.getInt(1));
+			e.setTieuDe(rs.getString(2));
+			e.setMoTa(rs.getString(3));
+			e.setHinhAnh(rs.getString(4));
+			e.setNgayDang(rs.getDate(5));
+			e.setNoiDung(rs.getString(6));
+			e.setTrangThai(rs.getBoolean(7));
+			e.setMaDanhMuc(rs.getInt(8));
+			list.add(e);
+		}
+		return list;
+	}
+	
+	public static List<BaiViet> listNews() throws SQLException {
+		String query = "select * from BaiViet where TrangThai = 1";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		List<BaiViet> list = new ArrayList<BaiViet>();
+		while (rs.next()) {
+			BaiViet e = new BaiViet();
+			e.setMaBaiViet(rs.getInt(1));
+			e.setTieuDe(rs.getString(2));
+			e.setMoTa(rs.getString(3));
+			e.setHinhAnh(rs.getString(4));
+			e.setNgayDang(rs.getDate(5));
+			e.setNoiDung(rs.getString(6));
+			e.setTrangThai(rs.getBoolean(7));
+			e.setMaDanhMuc(rs.getInt(8));
+			list.add(e);
+		}
+		return list;
+	}
+	
+	public static List<BaiViet> listNewsByCategory(int id) throws SQLException {
+		String query = "select * from BaiViet where TrangThai = 1 and MaDanhMuc = "+ id;
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		List<BaiViet> list = new ArrayList<BaiViet>();
+		while (rs.next()) {
+			BaiViet e = new BaiViet();
+			e.setMaBaiViet(rs.getInt(1));
+			e.setTieuDe(rs.getString(2));
+			e.setMoTa(rs.getString(3));
+			e.setHinhAnh(rs.getString(4));
+			e.setNgayDang(rs.getDate(5));
+			e.setNoiDung(rs.getString(6));
+			e.setTrangThai(rs.getBoolean(7));
+			e.setMaDanhMuc(rs.getInt(8));
+			list.add(e);
+		}
+		return list;
 	}
 }

@@ -50,6 +50,13 @@
 <!-- Custom Theme Style -->
 <link href="../backend/build/css/custom.min.css" rel="stylesheet">
 <script src="../backend/ckeditor/ckeditor.js" language="javascript"></script>
+<script>
+// Cấu hình lại màu nền giao diện.
+CKEDITOR.config.uiColor = '#9AB8F3';
+CKEDITOR.config.resize_enabled = false;
+CKEDITOR.config.width = '850px';
+CKEDITOR.config.height = '250px';
+</script>
 <!-- jQuery -->
 <script src="../backend/vendors/jquery/dist/jquery.min.js"></script>
 </head>
@@ -194,13 +201,13 @@
 
 						<div class="form-group" id="color">
 							<label class="control-label col-md-2">Màu sắc</label>
-							<div class="col-md-10">
+							<div class="col-md-10 checkbox">
 								<%
 									ArrayList<MauSac> dsMauSac = (ArrayList<MauSac>) request.getAttribute("dsMauSac");
 									for (int i = 0; i < dsMauSac.size(); i++) {
 								%>
-								<input type="checkbox" name="color" placeholder="<%=dsMauSac.get(i).getTenMau()%>"
-									value="<%=dsMauSac.get(i).getMaMau()%>" /> <label><%=dsMauSac.get(i).getTenMau()%></label>
+								 <label style="margin-right: 30px;"><input type="checkbox" name="color" placeholder="<%=dsMauSac.get(i).getTenMau()%>"
+									value="<%=dsMauSac.get(i).getMaMau()%>" /><%=dsMauSac.get(i).getTenMau()%></label>
 								<%
 									}
 								%>
@@ -297,7 +304,7 @@
 	<script
 		src="../backend/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 	<script src="../backend/vendors/jszip/dist/jszip.min.js"></script>
-
+	<script src="../backend/vendors/iCheck/icheck.min.js"></script>
 	<!-- Custom Theme Scripts -->
 	<script src="../backend/build/js/custom.min.js"></script>
 

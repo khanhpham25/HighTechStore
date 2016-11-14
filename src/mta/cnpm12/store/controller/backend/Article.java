@@ -1,5 +1,6 @@
 package mta.cnpm12.store.controller.backend;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
 
 import mta.cnpm12.store.beans.BaiViet;
 import mta.cnpm12.store.beans.DanhMucBaiViet;
@@ -107,18 +110,23 @@ public class Article extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		MultipartRequest multi=new MultipartRequest(request,".",10*1024*1024,"UTF-8");
 		String task = "";
-		if (request.getParameter("task") != null) {
-			task = request.getParameter("task");
+		if (multi.getParameter("task") != null) {
+			task = multi.getParameter("task");
 		}
 		if (task.equals("create")) {
-			String title = request.getParameter("title");
-			String desc = request.getParameter("desc");
+			String title = multi.getParameter("title");
+			String desc = multi.getParameter("desc");
+			File file=multi.getFile("img");
+			String savefolder = getServletContext().getInitParameter("file-upload");
+			file.renameTo(new File(savefolder,file.getName()));
+			String img = file.getName();
 			Date date = new Date(System.currentTimeMillis());
-			String content = request.getParameter("content");
-			Boolean status = Boolean.parseBoolean(request.getParameter("status"));
-			int cate = Integer.parseInt(request.getParameter("cate"));
-			BaiViet e = new BaiViet(0, title, desc, date, content, status, cate);
+			String content = multi.getParameter("content");
+			Boolean status = Boolean.parseBoolean(multi.getParameter("status"));
+			int cate = Integer.parseInt(multi.getParameter("cate"));
+			BaiViet e = new BaiViet(0, title, desc, img, date, content, status, cate);
 			boolean bl = false;
 			try {
 				bl = ArticleDAO.create(e);
@@ -131,14 +139,14 @@ public class Article extends HttpServlet {
 			}
 		}
 		if (task.equals("edit")) {
-			String title = request.getParameter("title");
-			String desc = request.getParameter("desc");
+			String title = multi.getParameter("title");
+			String desc = multi.getParameter("desc");
 			Date date = new Date(System.currentTimeMillis());
-			String content = request.getParameter("content");
-			Boolean status = Boolean.parseBoolean(request.getParameter("status"));
-			int cate = Integer.parseInt(request.getParameter("cate"));
-			int id = Integer.parseInt(request.getParameter("id"));
-			BaiViet e = new BaiViet(id, title, desc, date, content, status, cate);
+			String content = multi.getParameter("content");
+			Boolean status = Boolean.parseBoolean(multi.getParameter("status"));
+			int cate = Integer.parseInt(multi.getParameter("cate"));
+			int id = Integer.parseInt(multi.getParameter("id"));
+			BaiViet e = new BaiViet(id, title, desc, "", date, content, status, cate);
 			boolean bl = false;
 			try {
 				bl = ArticleDAO.edit(e);

@@ -40,7 +40,6 @@ public class ColorDAO {
 			}
 		}
 		return false;
-
 	}
 
 	public static boolean create(MauSac e) throws SQLException {

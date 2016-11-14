@@ -1,3 +1,4 @@
+<%@page import="mta.cnpm12.store.beans.KhachHang"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div id="top">
@@ -14,10 +15,24 @@
 			</div>
 			<div class="col-xs-7">
 				<div class="login">
+				<%
+				KhachHang e = (KhachHang) request.getSession().getAttribute("clientLogin");
+				if(e == null){
+					%>
 					<a href="#" data-toggle="modal" data-target="#login-modal"><i
 						class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Đăng
-							nhập</span></a> <a href="#"><i class="fa fa-user"></i> <span
+							nhập</span></a> <a href="<%=request.getContextPath()%>/register"><i class="fa fa-user"></i> <span
 						class="hidden-xs text-uppercase">Đăng ký</span></a>
+					<%
+				}
+				else{
+					%>
+					  <a href="#">Xin chào, <b><%= e.getHoTen() %></b></a>
+					  <a href="<%=request.getContextPath()%>/index?task=logout">Đăng xuất</a>
+					<%
+				}
+				%>
+					
 				</div>
 			</div>
 		</div>

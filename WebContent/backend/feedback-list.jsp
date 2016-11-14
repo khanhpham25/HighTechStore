@@ -87,6 +87,7 @@
 									<tr>
 										<th>Mã phản hồi</th>
 										<th>Người phản hồi</th>
+										<th>Ngày giờ</th>
 										<th>Thao tác</th>
 									</tr>
 								</thead>
@@ -105,6 +106,7 @@
 										<%
 											
 										%>
+										<td><%= list.get(i).getNgayGio() %></td>
 										<td width="200px;"><a
 											href="<%=request.getContextPath()%>/admin/feedback?task=detail&id=<%=list.get(i).getMaPhanHoi()%>"
 											class="btn btn-info">Chi tiết</a> <a
