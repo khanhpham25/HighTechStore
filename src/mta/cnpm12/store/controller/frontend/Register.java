@@ -63,7 +63,7 @@ public class Register extends HttpServlet {
 			String checkUsername = CustomerDAO.check(username);
 			String checkEmail = CustomerDAO.check(email);
 			if(checkUsername == null && checkEmail == null){
-				KhachHang e = new KhachHang(0, name, address, tel, email, gender, username, password, true);
+				KhachHang e = new KhachHang(name, address, tel, email, gender, username, password, true);
 				boolean bl = false;
 				bl = CustomerDAO.create(e);
 				if(bl){

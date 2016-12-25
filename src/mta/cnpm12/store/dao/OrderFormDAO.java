@@ -1,6 +1,7 @@
 package mta.cnpm12.store.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,7 +79,19 @@ public class OrderFormDAO {
 		return false;
 	}
 
+	public static boolean deleteDetail(int id) throws SQLException {
+		PreparedStatement pstmt;
+		pstmt = con.prepareStatement("delete from ChiTietDonHang where MaDonHang = ?");
+		pstmt.setInt(1, id);
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean delete(int id) throws SQLException {
+		deleteDetail(id);
 		PreparedStatement pstmt;
 		pstmt = con.prepareStatement("delete from DonHang where MaDonHang = ?");
 		pstmt.setInt(1, id);
@@ -87,5 +100,44 @@ public class OrderFormDAO {
 			return true;
 		}
 		return false;
+	}
+
+	public static int create(DonHang e) throws SQLException {
+		PreparedStatement pstmt;
+		pstmt = con.prepareStatement("insert into DonHang values (?,?,?,?)");
+		pstmt.setDate(1, (Date) e.getNgayDat());
+		pstmt.setBoolean(2, e.isTinhTrangGiaoHang());
+		pstmt.setString(3, e.getGhiChu());
+		pstmt.setInt(4, e.getMaKhachHang());
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			return e.getMaDonHang();
+		}
+		return 0;
+	}
+	
+	public static boolean createOrderFormDetail(ChiTietDonHang e) throws SQLException {
+		PreparedStatement pstmt;
+		pstmt = con.prepareStatement("insert into ChiTietDonHang values (?,?,?,?,?)");
+		pstmt.setInt(1, e.getMaDonHang());
+		pstmt.setInt(2, e.getMaSP());
+		pstmt.setInt(3, e.getMaMau());
+		pstmt.setDouble(4, e.getDonGia());
+		pstmt.setInt(5, e.getSoLuong());
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static int maxId() throws SQLException{
+		String query = "select max(MaDonHang) from DonHang";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			return rs.getInt(1);
+		}
+		return 0;
 	}
 }

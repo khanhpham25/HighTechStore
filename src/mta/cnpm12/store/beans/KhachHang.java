@@ -15,9 +15,8 @@ public class KhachHang {
 
 	}
 
-	public KhachHang(int maKhachHang, String hoTen, String diaChi, String soDienThoai, String email, boolean gioiTinh,
+	public KhachHang(String hoTen, String diaChi, String soDienThoai, String email, boolean gioiTinh,
 			String tenDangNhap, String matKhau, boolean phanLoai) {
-		MaKhachHang = maKhachHang;
 		HoTen = hoTen;
 		DiaChi = diaChi;
 		SoDienThoai = soDienThoai;

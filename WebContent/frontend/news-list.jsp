@@ -1,3 +1,4 @@
+<%@page import="mta.cnpm12.store.controller.frontend.SessionCounter"%>
 <%@page import="mta.cnpm12.store.dao.ArticleCommentDAO"%>
 <%@page import="mta.cnpm12.store.beans.DanhMucBaiViet"%>
 <%@page import="mta.cnpm12.store.beans.BaiViet"%>
@@ -98,12 +99,30 @@
     					<%
     				}
                     %>
-                        <ul class="pager">
-                            <li class="previous"><a href="#">&larr; Older</a>
-                            </li>
-                            <li class="next disabled"><a href="#">Newer &rarr;</a>
-                            </li>
-                        </ul>
+                        <div class="pages">
+							<ul class="pagination" style="text-align: center;">
+							<%
+							int totalRecord = Integer.parseInt(request.getAttribute("totalRecord").toString());
+							int pageSize = Integer.parseInt(request.getAttribute("pageSize").toString());
+							int totalPage = Integer.parseInt(request.getAttribute("totalPage").toString());
+							if(totalRecord > 0){
+								if(totalPage > 1){
+									for(int i = 1; i <= totalPage; i++){
+										%>
+										<li><a href="<%= request.getContextPath()%>/news-list?page=<%= i %>"><%= i %></a></li>
+										<%
+									}
+								}
+							}
+							else{
+								%>
+								<h3 style="color: red;">Không có bài viết nào!</h3>
+								<%
+							}
+							
+							%>
+							</ul>
+						</div>
                     </div>
                     <!-- /.col-md-9 -->
 
@@ -123,13 +142,14 @@
                                 ArrayList<DanhMucBaiViet> listCate = (ArrayList<DanhMucBaiViet>) request.getAttribute("listCate");
                                 for(int i = 0; i < listCate.size(); i++){
                                 	%>
-                                	<li><a href="<%= request.getContextPath()%>/news-list?cateid=<%= listCate.get(i).getMaDanhMuc()%>"><%= listCate.get(i).getTenDanhMuc() %></a></li>
+                                	<li><a href="<%= request.getContextPath()%>/news-list?cateid=<%= listCate.get(i).getMaDanhMuc()%>&page=1"><%= listCate.get(i).getTenDanhMuc() %></a></li>
                                 	<%
                                 }
                                 %>
                                 </ul>
                             </div>
                         </div>
+                        <h4 style="color:red;">Số người online: <%= SessionCounter.getSonguoionline() %></h4>
                         <!-- *** MENUS AND FILTERS END *** -->
                     </div>
                     <!-- /.col-md-3 -->

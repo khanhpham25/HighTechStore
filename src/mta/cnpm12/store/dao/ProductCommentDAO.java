@@ -1,6 +1,7 @@
 package mta.cnpm12.store.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,6 +70,40 @@ public class ProductCommentDAO {
 		PreparedStatement pstmt;
 		pstmt = con.prepareStatement("delete from BinhLuanSanPham where MaBinhLuan = ?");
 		pstmt.setInt(1, id);
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static List<BinhLuanSanPham> getByProdId(int id) throws SQLException {
+		String query = "select * from BinhLuanSanPham where MaSP = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		ArrayList<BinhLuanSanPham> list = new ArrayList<>();
+		while (rs.next()) {
+			BinhLuanSanPham e = new BinhLuanSanPham();
+			e.setMaBinhLuan(rs.getInt(1));
+			e.setTenNguoiBinhLuan(rs.getString(2));
+			e.setNgayGio(rs.getDate(3));
+			e.setNoiDung(rs.getString(4));
+			e.setTrangThai(rs.getBoolean(5));
+			e.setMaSP(rs.getInt(6));
+			list.add(e);
+		}
+		return list;
+	}
+	
+	public static boolean create(BinhLuanSanPham e) throws SQLException {
+		PreparedStatement pstmt;
+		pstmt = con.prepareStatement("insert into BinhLuanSanPham values (?,?,?,?,?)");
+		pstmt.setString(1, e.getTenNguoiBinhLuan());
+		pstmt.setDate(2, (Date) e.getNgayGio());
+		pstmt.setString(3, e.getNoiDung());
+		pstmt.setBoolean(4, e.isTrangThai());
+		pstmt.setInt(5, e.getMaSP());
 		int i = pstmt.executeUpdate();
 		if (i > 0) {
 			return true;

@@ -151,4 +151,14 @@ public class CustomerDAO {
 		}
 		return null;
 	}
+	
+	public static int maxId() throws SQLException{
+		String query = "select max(MaKhachHang) from KhachHang";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			return rs.getInt(1);
+		}
+		return 0;
+	}
 }

@@ -13,8 +13,7 @@ public class DonHang {
 
 	}
 
-	public DonHang(int maDonHang, Date ngayDat, boolean tinhTrangGiaoHang, String ghiChu, int maKhachHang) {
-		MaDonHang = maDonHang;
+	public DonHang(Date ngayDat, boolean tinhTrangGiaoHang, String ghiChu, int maKhachHang) {
 		NgayDat = ngayDat;
 		TinhTrangGiaoHang = tinhTrangGiaoHang;
 		GhiChu = ghiChu;

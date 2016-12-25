@@ -120,7 +120,7 @@ public class ArticleDAO {
 		return list;
 	}
 	
-	public static List<BaiViet> listNews() throws SQLException {
+	public static List<BaiViet> listNews(int firstResult, int maxResult) throws SQLException {
 		String query = "select * from BaiViet where TrangThai = 1";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
@@ -137,10 +137,37 @@ public class ArticleDAO {
 			e.setMaDanhMuc(rs.getInt(8));
 			list.add(e);
 		}
-		return list;
+		if(maxResult == list.size()){
+			return list;
+		}
+		else{
+			List<BaiViet> listResult = new ArrayList<BaiViet>();
+			if(firstResult+maxResult - 1 < list.size()){
+				for(int i = firstResult; i <= firstResult+maxResult-1; i++){
+					listResult.add(list.get(i));
+				}
+			}
+			else{
+				for(int i = firstResult; i < list.size(); i++){
+					listResult.add(list.get(i));
+				}
+			}
+			return listResult;
+		}
 	}
 	
-	public static List<BaiViet> listNewsByCategory(int id) throws SQLException {
+	public static int countNews() throws SQLException {
+		String query = "select count(MaBaiViet) from BaiViet";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		int count = 0;
+		while (rs.next()) {
+			count = rs.getInt(1);
+		}
+		return count;
+	}
+	
+	public static List<BaiViet> listNewsByCategory(int id, int firstResult, int maxResult) throws SQLException {
 		String query = "select * from BaiViet where TrangThai = 1 and MaDanhMuc = "+ id;
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
@@ -157,6 +184,33 @@ public class ArticleDAO {
 			e.setMaDanhMuc(rs.getInt(8));
 			list.add(e);
 		}
-		return list;
+		if(maxResult == list.size()){
+			return list;
+		}
+		else{
+			List<BaiViet> listResult = new ArrayList<BaiViet>();
+			if(firstResult+maxResult - 1 < list.size()){
+				for(int i = firstResult; i <= firstResult+maxResult-1; i++){
+					listResult.add(list.get(i));
+				}
+			}
+			else{
+				for(int i = firstResult; i < list.size(); i++){
+					listResult.add(list.get(i));
+				}
+			}
+			return listResult;
+		}
+	}
+	
+	public static int countNewsByCategory(int id) throws SQLException {
+		String query = "select count(MaBaiViet) from BaiViet where TrangThai = 1 and MaDanhMuc = "+ id;
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		int count = 0;
+		while (rs.next()) {
+			count = rs.getInt(1);
+		}
+		return count;
 	}
 }

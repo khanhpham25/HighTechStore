@@ -61,7 +61,7 @@ public class Index extends HttpServlet {
 				List<BaiViet> listNews = ArticleDAO.listHotNews();
 				List<HinhAnh> listImage = new ArrayList<>();
 				for(int i = 0; i < listProduct.size(); i++){
-					listImage.add(ProductDAO.getImageHotProduct(listProduct.get(i).getMaSP()));
+					listImage.add(ProductDAO.getImageByProductId(listProduct.get(i).getMaSP()));
 				}
 				request.setAttribute("listImage", listImage);
 				request.setAttribute("listProduct", listProduct);

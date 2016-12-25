@@ -114,7 +114,8 @@ public class Customer extends HttpServlet {
 					password = Encryptor.encryptMD5(password);
 				}
 				boolean status = Boolean.parseBoolean(request.getParameter("status"));
-				KhachHang e = new KhachHang(id, name, address, phone, email, gender, username, password, status);
+				KhachHang e = new KhachHang(name, address, phone, email, gender, username, password, status);
+				e.setMaKhachHang(id);
 				boolean bl = false;
 				bl = CustomerDAO.edit(e);
 				if (bl) {

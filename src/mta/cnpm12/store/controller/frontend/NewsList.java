@@ -43,10 +43,29 @@ public class NewsList extends HttpServlet {
 		}
 		if(cateid.equals("")){
 			try {
-				List<BaiViet> e = ArticleDAO.listNews();
+				int page = 0, firstResult = 0, maxResult = 0, totalRecord = 0;
+				int pageSize = 3;
+				int totalPage = 0;
+				if(request.getParameter("page") != null){
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				totalRecord = ArticleDAO.countNews();
+				if(totalRecord <= pageSize){
+					firstResult = 1;
+					maxResult = totalRecord;
+				}
+				else{
+					firstResult = (page - 1) * pageSize;
+					maxResult = pageSize;
+				}
+				totalPage = (int) Math.ceil((double)totalRecord/pageSize);
+				List<BaiViet> e = ArticleDAO.listNews(firstResult, maxResult);
 				List<DanhMucBaiViet> listCate = ArticleCategoryDAO.listAll();
 				request.setAttribute("listNews", e);
 				request.setAttribute("listCate", listCate);
+				request.setAttribute("totalRecord", totalRecord);
+				request.setAttribute("pageSize", pageSize);
+				request.setAttribute("totalPage", totalPage);
 				request.getRequestDispatcher("/frontend/news-list.jsp").forward(request, response);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -55,10 +74,29 @@ public class NewsList extends HttpServlet {
 		}
 		if(!cateid.equals("")){
 			try {
-				List<BaiViet> e = ArticleDAO.listNewsByCategory(Integer.parseInt(cateid));
+				int page = 0, firstResult = 0, maxResult = 0, totalRecord = 0;
+				int pageSize = 3;
+				int totalPage = 0;
+				if(request.getParameter("page") != null){
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				totalRecord = ArticleDAO.countNewsByCategory(Integer.parseInt(cateid));
+				if(totalRecord <= pageSize){
+					firstResult = 1;
+					maxResult = totalRecord;
+				}
+				else{
+					firstResult = (page - 1) * pageSize;
+					maxResult = pageSize;
+				}
+				totalPage = (int) Math.ceil((double)totalRecord/pageSize);
+				List<BaiViet> e = ArticleDAO.listNewsByCategory(Integer.parseInt(cateid), firstResult, maxResult);
 				List<DanhMucBaiViet> listCate = ArticleCategoryDAO.listAll();
 				request.setAttribute("listNews", e);
 				request.setAttribute("listCate", listCate);
+				request.setAttribute("totalRecord", totalRecord);
+				request.setAttribute("pageSize", pageSize);
+				request.setAttribute("totalPage", totalPage);
 				request.getRequestDispatcher("/frontend/news-list-by-category.jsp").forward(request, response);
 			} catch (NumberFormatException | SQLException e) {
 				// TODO Auto-generated catch block
