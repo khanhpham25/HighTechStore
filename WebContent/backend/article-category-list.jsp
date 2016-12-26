@@ -79,6 +79,13 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="x_content">
+							<%
+							String error = "";
+							if(request.getAttribute("error") != null){
+								error = request.getAttribute("error").toString();
+							}
+							%>
+							<h4 style="color: red;"><%= error %></h4>
 							<table id="datatable-buttons"
 								class="table table-striped table-bordered">
 								<thead>

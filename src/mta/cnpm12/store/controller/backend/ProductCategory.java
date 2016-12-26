@@ -77,6 +77,12 @@ public class ProductCategory extends HttpServlet {
 					if (bl) {
 						response.sendRedirect(request.getContextPath() + "/admin/product-category");
 					}
+					else{
+						List<DanhMucSanPham> list = ProductCategoryDAO.listAll();
+						request.setAttribute("list", list);
+						request.setAttribute("error", "Danh mục này có chứa sản phẩm. Không thể xóa!");
+						request.getRequestDispatcher("/backend/product-category-list.jsp").forward(request, response);
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

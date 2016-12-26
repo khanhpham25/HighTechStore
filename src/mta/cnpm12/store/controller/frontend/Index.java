@@ -87,12 +87,8 @@ public class Index extends HttpServlet {
 			KhachHang e = CustomerDAO.checkLogin(username, password);
 			if(e != null){
 				request.getSession().setAttribute("clientLogin", e);
-				response.sendRedirect(request.getContextPath() + "/index");
 			}
-			else{
-				request.setAttribute("error", "Sai tên đăng nhập hoặc mật khẩu!");
-				request.getRequestDispatcher("/frontend/index.jsp").forward(request, response);
-			}
+			response.sendRedirect(request.getContextPath() + "/index");
 		} catch (NoSuchAlgorithmException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -88,9 +88,7 @@
 								}
 							%>
 
-
-							<form action="<%=request.getContextPath()%>/register"
-								method="post">
+							<form action="<%=request.getContextPath()%>/register" method="post">
 								<div class="form-group">
 									<label>Họ tên <span class="required">*</span></label> <input type="text" class="form-control"
 										name="name" required="required" autocomplete="off">

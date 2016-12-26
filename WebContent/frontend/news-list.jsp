@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h2><a style="text-decoration: none;" href="#"><%= listNews.get(i).getTieuDe() %></a></h2>
+                                    <h2><a style="text-decoration: none;" href="<%= request.getContextPath() %>/news?id=<%= listNews.get(i).getMaBaiViet() %>"><%= listNews.get(i).getTieuDe() %></a></h2>
                                     <div class="clearfix">
                                         <p class="author-category">By Universal
                                         </p>
@@ -119,7 +119,6 @@
 								<h3 style="color: red;">Không có bài viết nào!</h3>
 								<%
 							}
-							
 							%>
 							</ul>
 						</div>

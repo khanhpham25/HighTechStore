@@ -87,7 +87,12 @@ public class ProductCategoryDAO {
 		PreparedStatement pstmt;
 		pstmt = con.prepareStatement("delete from DanhMucSanPham where MaDanhMuc = ?");
 		pstmt.setInt(1, id);
-		int i = pstmt.executeUpdate();
+		int i = 0;
+		try {
+			i = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}		
 		if (i > 0) {
 			return true;
 		}

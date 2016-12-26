@@ -60,8 +60,8 @@ public class Register extends HttpServlet {
 		String password;
 		try {
 			password = Encryptor.encryptMD5(request.getParameter("password"));
-			String checkUsername = CustomerDAO.check(username);
-			String checkEmail = CustomerDAO.check(email);
+			String checkUsername = CustomerDAO.checkUsername(username);
+			String checkEmail = CustomerDAO.checkEmail(email);
 			if(checkUsername == null && checkEmail == null){
 				KhachHang e = new KhachHang(name, address, tel, email, gender, username, password, true);
 				boolean bl = false;
@@ -86,9 +86,7 @@ public class Register extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
-		
+
 	}
 
 }

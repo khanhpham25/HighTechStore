@@ -216,7 +216,7 @@ public class ProductDAO {
 	}
 
 	public static List<SanPham> listProductByCategory(int id, int firstResult, int maxResult) throws SQLException {
-		String query = "select * from SanPham where MaDanhMuc = " + id;
+		String query = "select * from SanPham where TrangThai = 1 and MaDanhMuc = " + id;
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
 		List<SanPham> list = new ArrayList<SanPham>();
@@ -253,7 +253,7 @@ public class ProductDAO {
 	}
 
 	public static int countProductByCategory(int id) throws SQLException {
-		String query = "select count(MaSP) from SanPham where MaDanhMuc = " + id;
+		String query = "select count(MaSP) from SanPham where TrangThai = 1 and MaDanhMuc = " + id;
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
 		int count = 0;
@@ -279,7 +279,7 @@ public class ProductDAO {
 
 	public static List<SanPham> listProductByCateBrand(int cateid, int brandid, int firstResult, int maxResult)
 			throws SQLException {
-		String query = "select * from SanPham where MaDanhMuc = " + cateid + " and MaThuongHieu = " + brandid;
+		String query = "select * from SanPham where TrangThai = 1 and MaDanhMuc = " + cateid + " and MaThuongHieu = " + brandid;
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
 		List<SanPham> list = new ArrayList<SanPham>();
@@ -316,7 +316,7 @@ public class ProductDAO {
 	}
 
 	public static int countProductByCateBrand(int cateid, int brandid) throws SQLException {
-		String query = "select count(MaSP) from SanPham where MaDanhMuc = " + cateid + " and MaThuongHieu = " + brandid;
+		String query = "select count(MaSP) from SanPham where TrangThai = 1 and MaDanhMuc = " + cateid + " and MaThuongHieu = " + brandid;
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
 		int count = 0;
@@ -328,7 +328,7 @@ public class ProductDAO {
 
 	public static List<SanPham> searchProduct(String keyword, int firstResult, int maxResult) throws SQLException {
 		if (keyword.replaceAll(" ", "").length() > 0) {
-			String query = "select * from SanPham where TrangThai = 1 and TenSP like '%" + keyword + "%'";
+			String query = "select * from SanPham where TrangThai = 1 and TenSP like N'%" + keyword + "%'";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			List<SanPham> list = new ArrayList<SanPham>();
@@ -368,7 +368,7 @@ public class ProductDAO {
 
 	public static int countSearchProduct(String keyword) throws SQLException {
 		if (keyword.replaceAll(" ", "").length() > 0) {
-			String query = "select count(MaSP) from SanPham where TrangThai = 1 and TenSP like '%" + keyword + "%'";
+			String query = "select count(MaSP) from SanPham where TrangThai = 1 and TenSP like N'%" + keyword + "%'";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			int count = 0;

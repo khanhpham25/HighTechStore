@@ -42,7 +42,7 @@
 				</div>
 				<div class="text">
 					<p class="buttons">
-						<a href="#"
+						<a href="<%= request.getContextPath() %>/product?id=<%= listProduct.get(i).getMaSP() %>"
 							class="btn btn-template-transparent-primary">View</a> 
 					</p>
 				</div>

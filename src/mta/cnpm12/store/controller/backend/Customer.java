@@ -57,7 +57,6 @@ public class Customer extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				return;
 			}
 			if (task.equals("edit")) {
 				int id = Integer.parseInt(request.getParameter("id"));
@@ -76,6 +75,12 @@ public class Customer extends HttpServlet {
 					boolean bl = CustomerDAO.delete(id);
 					if (bl) {
 						response.sendRedirect(request.getContextPath() + "/admin/customer");
+					}
+					else{
+						List<KhachHang> list = CustomerDAO.listAll();
+						request.setAttribute("list", list);
+						request.setAttribute("error", "Khách hàng đang tham gia giao dịch. Không thể xóa!");
+						request.getRequestDispatcher("/backend/customer-list.jsp").forward(request, response);
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -99,7 +104,6 @@ public class Customer extends HttpServlet {
 			task = request.getParameter("task");
 		}
 		if (task.equals("edit")) {
-			// String name = request.getParameter("name");
 			int id = Integer.parseInt(request.getParameter("id"));
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");

@@ -19,6 +19,14 @@
 						<input type="password" class="form-control" name="password"
 							placeholder="Mật khẩu" autocomplete="off">
 					</div>
+					<%
+					if(request.getAttribute("error") != null){
+						String error = request.getAttribute("error").toString();
+						%>
+						<h5 style="color: red;"><%= error %></h5>
+						<%
+					}
+					%>
 					<p class="text-center">
 						<button type="submit" class="btn btn-template-main">
 							<i class="fa fa-sign-in"></i> Đăng nhập

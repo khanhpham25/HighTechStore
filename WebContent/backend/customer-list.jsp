@@ -79,6 +79,13 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="x_content">
+							<%
+							String error = "";
+							if(request.getAttribute("error") != null){
+								error = request.getAttribute("error").toString();
+							}
+							%>
+							<h4 style="color: red;"><%= error %></h4>
 							<table id="datatable-buttons"
 								class="table table-striped table-bordered">
 								<thead>
@@ -137,11 +144,26 @@
 										<%
 											}
 										%>
-										<td width="120px;"><a
-											href="<%=request.getContextPath()%>/admin/customer?task=edit&id=<%=list.get(i).getMaKhachHang()%>"
-											class="btn btn-primary">Sửa</a> <a
-											href="<%=request.getContextPath()%>/admin/customer?task=delete&id=<%=list.get(i).getMaKhachHang()%>"
-											class="btn btn-danger">Xóa</a></td>
+										<td width="120px;">
+										<div class="btn-group">
+												<button data-toggle="dropdown"
+													class="btn btn-danger dropdown-toggle" type="button">
+													Thao tác <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li>
+													<%
+													if(list.get(i).isPhanLoai() == true){
+														%>
+														<a href="<%=request.getContextPath()%>/admin/customer?task=edit&id=<%=list.get(i).getMaKhachHang()%>">Sửa</a>
+														<%
+													}
+													%> 
+													</li>
+													<li><a href="<%=request.getContextPath()%>/admin/customer?task=delete&id=<%=list.get(i).getMaKhachHang()%>">Xóa</a></li>
+												</ul>
+											</div>
+										</td>
 									</tr>
 									<%
 										}

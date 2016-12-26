@@ -27,7 +27,7 @@
 				}
 				else{
 					%>
-					  <a href="#">Xin chào, <b><%= e.getHoTen() %></b></a>
+					  <a href="<%= request.getContextPath()%>/profile">Xin chào, <b><%= e.getHoTen() %></b></a>
 					  <a href="<%=request.getContextPath()%>/index?task=logout">Đăng xuất</a>
 					<%
 				}

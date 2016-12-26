@@ -9,9 +9,6 @@
 			<h3 class="text-uppercase">Bạn đã sẵn sàng mua sắm?</h3>
 			<p class="lead">Chúng tôi dành cho bạn hàng trăm sản phẩm chất
 				lượng của các thương hiệu công nghệ hàng đầu thế giới.</p>
-			<p class="text-center">
-				<a href="#" class="btn btn-template-transparent-black btn-lg">Xem</a>
-			</p>
 		</div>
 
 	</div>

@@ -140,4 +140,22 @@ public class OrderFormDAO {
 		}
 		return 0;
 	}
+	
+	public static List<DonHang> getByCustomerId(int id) throws SQLException {
+		String query = "select * from DonHang where MaKhachHang = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		List<DonHang> list = new ArrayList<>();
+		while (rs.next()) {
+			DonHang e = new DonHang();
+			e.setMaDonHang(rs.getInt(1));
+			e.setNgayDat(rs.getDate(2));
+			e.setTinhTrangGiaoHang(rs.getBoolean(3));
+			e.setGhiChu(rs.getString(4));
+			e.setMaKhachHang(rs.getInt(5));
+			list.add(e);
+		}
+		return list;
+	}
 }

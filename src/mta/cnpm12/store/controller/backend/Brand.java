@@ -78,6 +78,12 @@ public class Brand extends HttpServlet {
 					if (bl) {
 						response.sendRedirect(request.getContextPath() + "/admin/brand");
 					}
+					else{
+						List<ThuongHieu> list = BrandDAO.listAll();
+						request.setAttribute("list", list);
+						request.setAttribute("error", "Thương hiệu đang được sử dụng. Không thể xóa!");
+						request.getRequestDispatcher("/backend/brand-list.jsp").forward(request, response);
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

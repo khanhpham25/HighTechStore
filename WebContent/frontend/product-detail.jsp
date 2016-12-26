@@ -92,6 +92,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="box">
+									<h3 style="text-align: center; color: navy;"><%= prod.getTenSP() %></h3>
 									<%
 										if (prod.getGiaKhuyenMai() != 0) {
 									%>

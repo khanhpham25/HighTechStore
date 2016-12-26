@@ -236,9 +236,33 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   <listener>
-	<listener-class>mta.cnpm12.store.controller.frontend.SessionCounter</listener-class>
+    <listener-class>mta.cnpm12.store.controller.frontend.SessionCounter</listener-class>
   </listener>
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+  <servlet>
+    <servlet-name>ProfileCustomerController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.ProfileCustomer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfileCustomerController</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PurchasingHistoryController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.PurchasingHistory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchasingHistoryController</servlet-name>
+    <url-pattern>/history</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PurchasingHistoryDetailController</servlet-name>
+    <servlet-class>mta.cnpm12.store.controller.frontend.PurchasingHistoryDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchasingHistoryDetailController</servlet-name>
+    <url-pattern>/history-detail</url-pattern>
+  </servlet-mapping>
 </web-app>

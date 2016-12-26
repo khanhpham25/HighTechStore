@@ -155,11 +155,11 @@
 								<form method="post" action="<%= request.getContextPath() %>/cart">
 									<div class="form-group">
 										<label for="name">Tên khách hàng</label> <input type="text"
-											class="form-control" id="txtName" name="txtName" autocomplete="off">
+											class="form-control" id="txtName" name="txtName" required="required" autocomplete="off">
 									</div>
 									<div class="form-group">
 										<label for="address">Địa chỉ</label> <input type="text"
-											class="form-control" id="txtAddress" name="txtAddress" autocomplete="off">
+											class="form-control" id="txtAddress" name="txtAddress" required="required" autocomplete="off">
 									</div>
 									<div class="form-group">
 										<label for="phone">Số điện thoại</label> <input type="text"
@@ -168,7 +168,7 @@
 									</div>
 									<div class="form-group">
 										<label for="email">Email</label> <input type="email"
-											class="form-control" id="txtEmail" name="txtEmail" autocomplete="off">
+											class="form-control" id="txtEmail" name="txtEmail" required="required" autocomplete="off">
 									</div>
 									<div class="form-group">
 										<label for="email">Yêu cầu thêm</label> <input type="text"

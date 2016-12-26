@@ -78,6 +78,12 @@ public class ArticleCategory extends HttpServlet {
 					if (bl) {
 						response.sendRedirect(request.getContextPath() + "/admin/article-category");
 					}
+					else{
+						List<DanhMucBaiViet> list = ArticleCategoryDAO.listAll();
+						request.setAttribute("list", list);
+						request.setAttribute("error", "Danh mục này có chứa bài viết. Không thể xóa!");
+						request.getRequestDispatcher("/backend/article-category-list.jsp").forward(request, response);
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

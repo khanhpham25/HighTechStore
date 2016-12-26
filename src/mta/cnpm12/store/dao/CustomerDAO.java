@@ -80,14 +80,19 @@ public class CustomerDAO {
 		PreparedStatement pstmt;
 		pstmt = con.prepareStatement("delete from KhachHang where MaKhachHang = ?");
 		pstmt.setInt(1, id);
-		int i = pstmt.executeUpdate();
+		int i = 0;
+		try {
+			i = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}		
 		if (i > 0) {
 			return true;
 		}
 		return false;
 	}
 	
-	public static String check(String keyword) throws SQLException {
+	public static String checkUsername(String keyword) throws SQLException {
 		String query = "select * from KhachHang";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
@@ -102,10 +107,29 @@ public class CustomerDAO {
 			e.setTenDangNhap(rs.getString(7));
 			e.setMatKhau(rs.getString(8));
 			e.setPhanLoai(rs.getBoolean(9));
-			if (e.getTenDangNhap().equals(keyword)) {
+			if (e.getTenDangNhap() == "keyword") {
 				return "Tên đăng nhập đã tồn tại";
 			}
-			if (e.getEmail().equals(keyword)) {
+		}
+		return null;
+	}
+	
+	public static String checkEmail(String keyword) throws SQLException {
+		String query = "select * from KhachHang";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			KhachHang e = new KhachHang();
+			e.setMaKhachHang(rs.getInt(1));
+			e.setHoTen(rs.getString(2));
+			e.setDiaChi(rs.getString(3));
+			e.setSoDienThoai(rs.getString(4));
+			e.setEmail(rs.getString(5));
+			e.setGioiTinh(rs.getBoolean(6));
+			e.setTenDangNhap(rs.getString(7));
+			e.setMatKhau(rs.getString(8));
+			e.setPhanLoai(rs.getBoolean(9));
+			if (e.getEmail() == "keyword") {
 				return "Email này đã được sử dụng";
 			}
 		}
@@ -160,5 +184,20 @@ public class CustomerDAO {
 			return rs.getInt(1);
 		}
 		return 0;
+	}
+	
+	public static boolean change_profile(KhachHang e) throws SQLException {
+		PreparedStatement pstmt;
+		pstmt = con.prepareStatement("update KhachHang set HoTen = ?, DiaChi = ?, SoDienThoai = ?, MatKhau = ? where MaKhachHang = ?");
+		pstmt.setString(1, e.getHoTen());
+		pstmt.setString(2, e.getDiaChi());
+		pstmt.setString(3, e.getSoDienThoai());
+		pstmt.setString(4, e.getMatKhau());
+		pstmt.setInt(5, e.getMaKhachHang());
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			return true;
+		}
+		return false;
 	}
 }
