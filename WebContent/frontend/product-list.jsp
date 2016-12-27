@@ -104,15 +104,26 @@
 							<ul class="pagination" style="text-align: center;">
 							<%
 							String cateid = request.getAttribute("cateid").toString();
+							String brandid = null;
+							if(request.getAttribute("brandid") != null){
+								brandid = request.getAttribute("brandid").toString();
+							}
 							int totalRecord = Integer.parseInt(request.getAttribute("totalRecord").toString());
 							int pageSize = Integer.parseInt(request.getAttribute("pageSize").toString());
 							int totalPage = Integer.parseInt(request.getAttribute("totalPage").toString());
 							if(totalRecord > 0){
 								if(totalPage > 1){
 									for(int i = 1; i <= totalPage; i++){
-										%>
-										<li><a href="<%= request.getContextPath()%>/product-list?cateid=<%= cateid %>&page=<%= i %>"><%= i %></a></li>
-										<%
+										if(brandid != null){
+											%>
+											<li><a href="<%= request.getContextPath()%>/product-list?cateid=<%= cateid %>&brandid=<%= brandid %>&page=<%= i %>"><%= i %></a></li>
+											<%
+										}
+										else{
+											%>
+											<li><a href="<%= request.getContextPath()%>/product-list?cateid=<%= cateid %>&page=<%= i %>"><%= i %></a></li>
+											<%
+										}
 									}
 								}
 							}
@@ -151,7 +162,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <h4 style="color:red;">Số người online: <%= SessionCounter.getSonguoionline() %></h4>
+                        <h4 style="color: red;">Số người đang truy cập: <%= request.getAttribute("userCounter") %></h4>
 						<!-- *** MENUS AND FILTERS END *** -->
 					</div>
 					<!-- /.col-md-3 -->

@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>2techstore</display-name>
   <welcome-file-list>
-    <welcome-file>/Index</welcome-file>
+    <welcome-file>index</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>ProductCategoryController</servlet-name>
@@ -235,12 +235,14 @@
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
-  <listener>
-    <listener-class>mta.cnpm12.store.controller.frontend.SessionCounter</listener-class>
-  </listener>
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+  <listener> 
+    <listener-class> 
+      mta.cnpm12.store.controller.frontend.SessionCounter
+    </listener-class> 
+  </listener>
   <servlet>
     <servlet-name>ProfileCustomerController</servlet-name>
     <servlet-class>mta.cnpm12.store.controller.frontend.ProfileCustomer</servlet-class>

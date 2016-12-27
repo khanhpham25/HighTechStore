@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +46,10 @@ public class ProductList extends HttpServlet {
 		if(request.getParameter("brandid") != null){
 			brandid = request.getParameter("brandid");
 		}
+		ServletContext servletContext = getServletContext(); 
+	    int userCounter = 0; 
+	    userCounter = Integer.parseInt((String)servletContext.getAttribute("userCounter"));
+	    request.setAttribute("userCounter", userCounter);
 		if(!cateid.equals("")){
 			if(brandid.equals("")){
 				try {
@@ -101,6 +106,7 @@ public class ProductList extends HttpServlet {
 					request.setAttribute("listProduct", listProduct);
 					request.setAttribute("listBrand", listBrand);
 					request.setAttribute("cateid", cateid);
+					request.setAttribute("brandid", brandid);
 					request.setAttribute("totalRecord", totalRecord);
 					request.setAttribute("pageSize", pageSize);
 					request.setAttribute("totalPage", totalPage);

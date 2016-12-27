@@ -148,11 +148,9 @@ public class Cart extends HttpServlet {
 						}
 						ChiTietDonHang orderFormDetail = new ChiTietDonHang(orderFormId, item.getSanPham().getMaSP(), item.getMauSac().getMaMau(), price, item.getSoLuong());
 						boolean bl = false;
-						bl = OrderFormDAO.createOrderFormDetail(orderFormDetail);
-						if(bl){
-							response.sendRedirect(request.getContextPath() + "/order-success");
-						}
+						OrderFormDAO.createOrderFormDetail(orderFormDetail);						
 					}
+					response.sendRedirect(request.getContextPath() + "/order-success");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +42,10 @@ public class NewsList extends HttpServlet {
 		if(request.getParameter("cateid") != null){
 			cateid = request.getParameter("cateid");
 		}
+		ServletContext servletContext = getServletContext(); 
+	    int userCounter = 0; 
+	    userCounter = Integer.parseInt((String)servletContext.getAttribute("userCounter"));
+	    request.setAttribute("userCounter", userCounter);
 		if(cateid.equals("")){
 			try {
 				int page = 0, firstResult = 0, maxResult = 0, totalRecord = 0;

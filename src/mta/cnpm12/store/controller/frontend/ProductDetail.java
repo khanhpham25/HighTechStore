@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +49,10 @@ public class ProductDetail extends HttpServlet {
 		if(request.getParameter("id")!= null){
 			id = request.getParameter("id");
 		}
+		ServletContext servletContext = getServletContext(); 
+	    int userCounter = 0; 
+	    userCounter = Integer.parseInt((String)servletContext.getAttribute("userCounter"));
+	    request.setAttribute("userCounter", userCounter);
 		if(!id.equals("")){
 			try {
 				SanPham prod = ProductDAO.getById(Integer.parseInt(id));

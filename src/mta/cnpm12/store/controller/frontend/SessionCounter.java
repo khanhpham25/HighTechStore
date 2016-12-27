@@ -1,31 +1,44 @@
 package mta.cnpm12.store.controller.frontend;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-public class SessionCounter implements HttpSessionListener {
-	private static int songuoionline=0;
+public class SessionCounter implements ServletContextListener, HttpSessionListener {
+	ServletContext servletContext;
+	int counter;
 
-	//ham de lay bien so nguoi online
-	public static int getSonguoionline() {
-	return songuoionline;
+	public void contextInitialized(ServletContextEvent sce) {
+		servletContext = sce.getServletContext();
+		servletContext.setAttribute(("userCounter"), Integer.toString(counter));
 	}
 
-	public void sessionCreated(HttpSessionEvent se) {
-	HttpSession session = se.getSession(); //lay session từ HttpSessionEvent
-	Date now = new Date();
-	//System.out.println("Da tao session co ID "+ session.getId()+" vao thoi diem " + now );
-	//System.out.println("Dang có " + songuoionline +" online");
-	songuoionline ++;
+	public void contextDestroyed(ServletContextEvent sce) {
 	}
 
-	public void sessionDestroyed(HttpSessionEvent se) {
-	HttpSession session = se.getSession(); //lay session từ HttpSessionEvent
-	Date now = new Date();
-	//System.out.println("Da huy session co ID "+ session.getId()+" vao thoi diem " + now );
-	songuoionline --;
+	public void sessionCreated(HttpSessionEvent hse) {
+		System.out.println("Session created.");
+		incrementUserCounter();
+	}
+
+	public void sessionDestroyed(HttpSessionEvent hse) {
+		System.out.println("Session destroyed.");
+		decrementUserCounter();
+	}
+
+	synchronized void incrementUserCounter() {
+		counter = Integer.parseInt((String) servletContext.getAttribute("userCounter"));
+		counter++;
+		servletContext.setAttribute(("userCounter"), Integer.toString(counter));
+		//System.out.println("User Count: " + counter);
+	}
+
+	synchronized void decrementUserCounter() {
+		int counter = Integer.parseInt((String) servletContext.getAttribute("userCounter"));
+		counter--;
+		servletContext.setAttribute(("userCounter"), Integer.toString(counter));
+		//System.out.println("User Count: " + counter);
 	}
 }

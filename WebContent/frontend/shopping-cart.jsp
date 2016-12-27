@@ -136,7 +136,7 @@
 								<form method="post" action="<%= request.getContextPath() %>/cart">
 									<div class="form-group" style="margin-top: 30px;">
 										<label for="email">Yêu cầu thêm</label> <input type="text"
-											class="form-control" id="txtnote" name="txtnote">
+											class="form-control" id="txtnote" name="txtnote" autocomplete="off">
 									</div>
 									<div class="box-footer">
 										<div class="pull-right">

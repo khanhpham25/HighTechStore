@@ -147,8 +147,8 @@
                                 %>
                                 </ul>
                             </div>
+                            <h4 style="color: red;">Số người đang truy cập: <%= request.getAttribute("userCounter") %></h4>
                         </div>
-                        <h4 style="color:red;">Số người online: <%= SessionCounter.getSonguoionline() %></h4>
                         <!-- *** MENUS AND FILTERS END *** -->
                     </div>
                     <!-- /.col-md-3 -->
